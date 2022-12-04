@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 const { SerialPort } = require("serialport");
 
@@ -21,8 +22,10 @@ arduinoSerialPort.on("open", function () {
   });
 });
 
-app.get("/", function (req, res) {
-  return res.send("Working");
+app.use(express.static(path.join(__dirname, "front/build")));
+
+app.get("/", function (요청, 응답) {
+  응답.sendFile(path.join(__dirname, "/front/build/index.html"));
 });
 
 app.get("/:action", function (req, res) {
@@ -42,4 +45,8 @@ app.get("/:action", function (req, res) {
 
 app.listen(port, function () {
   console.log("Example app listening on port http://0.0.0.0:" + port + "!");
+});
+
+app.get("*", function (요청, 응답) {
+  응답.sendFile(path.join(__dirname, "/react-project/build/index.html"));
 });
