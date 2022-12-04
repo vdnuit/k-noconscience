@@ -4,8 +4,14 @@ import { PropTypes } from "prop-types";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { passwordAtom } from "../atoms";
-
+import modalButton from "../assets/modalButton.png";
 const Container = styled.div`
+  background: #161a42;
+  box-shadow: 0px 13px 17px rgba(140, 213, 105, 0.2);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #075985;
   width: 300px;
   height: 200px;
   z-index: 500;
@@ -14,15 +20,33 @@ const Container = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 54px;
+    text-align: center;
 
-  background-color: gray;
+    /* Greys/Blue Grey/300 */
+
+    color: #f9fafb;
+  }
+  input {
+    padding: 1vh 0.5vw;
+    font-size: 2vh;
+    margin: 0vh 3vw;
+    font-family: "Inter";
+    border: 1px solid #075985;
+    border-radius: 1vh;
+  }
+  img {
+    margin: 3vh 6vw;
+    width: 100px;
+  }
 `;
-const Close = styled.button`
-  position: absolute;
-  right: 10px;
-  top: 10px;
-`;
-const Button = styled.button``;
 
 function Password({ setModalOpen }) {
   const navigate = useNavigate();
@@ -39,14 +63,14 @@ function Password({ setModalOpen }) {
   };
   return (
     <Container>
-      <h1>비밀번호를 설정해주세요</h1>
+      <h3>비밀번호를 설정해주세요</h3>
       <input
         type="password"
         onChange={onChange}
         value={text}
         placeholder="비밀번호"
       />
-      <button onClick={closeModal}>입력</button>
+      <img src={modalButton} onClick={closeModal} />
     </Container>
   );
 }

@@ -26,6 +26,7 @@ function App() {
 const GlobalStyle = createGlobalStyle`
   ${reset}
   // font import
+  
   @font-face {
     font-family: 'Inter';
     src: local('Inter'), local('Inter');
