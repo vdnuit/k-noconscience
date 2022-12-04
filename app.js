@@ -11,7 +11,27 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const nunjucks = require("nunjucks");
 const dotenv = require("dotenv");
+// var email = require("emailjs");
 
+// var servere = email.servere.connect({
+//   user: "voldenuitv@gmail.com",
+//   password: "montaigne11",
+//   host: "smtp.gmail.com",
+//   ssl: true,
+// });
+
+// servere.send(
+//   {
+//     text: "Hey howdy",
+//     from: "NodeJS",
+//     to: "Wilson <wilson.balderrama@gmail.com>",
+//     cc: "",
+//     subject: "Greetings",
+//   },
+//   function (err, message) {
+//     console.log(err || message);
+//   }
+// );
 dotenv.config();
 
 app.set("port", process.env.PORT || 8005);

@@ -82,13 +82,14 @@ function Warning() {
   };
   let timestring = `${time.year}/${time.month}/${time.date} ${time.hours}:${time.minutes}`;
   useEffect(() => {
-    init("nfXn64MOQq-Jxvukr");
-    send("gmail", "template_ebrhlej", {
+    init("QaGjvx3ID9Wyk_ygt");
+    send("gmail", "template_u498gz9", {
       username: "이용자",
       time: timestring,
       password: password,
     });
   }, []);
+
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const showModal = () => {
@@ -104,6 +105,7 @@ function Warning() {
     console.log(event.data);
     webSocket.send("클라이언트에서 서버로 답장을 보냅니다");
     if (event.data < 253) {
+      webSocket.close();
       navigate(`/rest/*`);
     }
   };

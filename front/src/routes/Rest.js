@@ -127,6 +127,7 @@ function Rest() {
     console.log(event.data);
     webSocket.send("클라이언트에서 서버로 답장을 보냅니다"); // 서버로부터 메세지 받으면 바로 서버로 메세지 보냄
     if (event.data >= 253) {
+      webSocket.close();
       navigate(`/warning/*`);
     }
   };
