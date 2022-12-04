@@ -16,6 +16,9 @@ const arduinoSerialPort = new SerialPort({
 
 arduinoSerialPort.on("open", function () {
   console.log("Serial Port " + arduinoCOMPort + " is opened.");
+  arduinoSerialPort.on("data", function (data) {
+    console.log("Sensor Value : ", data[0]);
+  });
 });
 
 app.get("/", function (req, res) {

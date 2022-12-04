@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="Generator" content="EditPlus®" />
+    <meta name="Author" content="" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <title>아두이노-자바스크립트 통신 예제</title>
+
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+    <style>
+      #messages {
+        background-color: blue;
+        color: black;
+        width: 600px;
+        height: 300px;
+        background-color: #f5d682;
+        border: 1px solid red;
+        text-align: left;
+        padding: 10px;
+        font-size: 28px;
+      }
+
+      .data {
+        font-size: 50px;
+        color: #0099ff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>아두이노와 Node.js 웹브라우저 시리얼, 소켓 통신 예제</h1>
+
+    <div id="messages">
+      <p>온도: <span id="temp" class="data"></span>°C</p>
+      <p>습도: <span id="hum" class="data"></span>%</p>
+    </div>
+    <form id="form" action="">
+      <input id="input" autocomplete="off" /><button>Send</button>
+    </form>
+
+    <script>
+      var socket = io();
+
+      var temp = document.getElementById("temp");
+      var hum = document.getElementById("hum");
+      var form = document.getElementById("form");
+      var input = document.getElementById("input");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (input.value) {
+          socket.emit("message", input.value);
+          input.value = "";
+          console.log("sending OK");
+        }
+      });
+
+      socket.on("data", (msg) => {
+        //console.log(msg);
+        const obj = JSON.parse(msg);
+        console.log(obj);
+        temp.innerText = obj.temp;
+        hum.innerText = obj.humidity;
+      });
+    </script>
+  </body>
+</html>
