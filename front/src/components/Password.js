@@ -41,7 +41,7 @@ function Password({ setModalOpen }) {
     <Container>
       <h1>비밀번호를 설정해주세요</h1>
       <input
-        type="text"
+        type="password"
         onChange={onChange}
         value={text}
         placeholder="비밀번호"

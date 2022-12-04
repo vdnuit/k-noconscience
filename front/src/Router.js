@@ -3,6 +3,8 @@ import Main from "./routes/Main";
 import Question from "./routes/Question";
 import Rest from "./routes/Rest";
 import Warning from "./routes/Warning";
+
+import Welcome from "./routes/Welcome";
 import Header from "./components/Header";
 
 function Router() {
@@ -24,6 +26,11 @@ function Router() {
         <Route
           path="/warning/*"
           element={<Warning />}
+          errorElement={<Main />}
+        ></Route>
+        <Route
+          path="/welcome/*"
+          element={<Welcome />}
           errorElement={<Main />}
         ></Route>
         <Route path={"*"} component={Main} />

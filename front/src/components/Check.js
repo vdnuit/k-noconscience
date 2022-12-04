@@ -36,7 +36,7 @@ function Check({ setModalOpen }) {
       console.log(text);
       console.log(password);
 
-      navigate(`/`);
+      navigate(`/welcome/*`);
       setModalOpen(false);
     } else {
       navigate(`/warning/*`);
@@ -46,7 +46,7 @@ function Check({ setModalOpen }) {
     <Container>
       <h1>비밀번호를 입력해주세요</h1>
       <input
-        type="text"
+        type="password"
         onChange={onChange}
         value={text}
         placeholder="비밀번호"
