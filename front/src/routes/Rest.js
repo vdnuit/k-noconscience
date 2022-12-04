@@ -1,10 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Password from "../components/Password";
 const Container = styled.div``;
 const Box = styled.div``;
-function Question() {
+
+const Stopwatch = () => {
+  const [time, setTime] = useState(0);
+  const [running, setRunning] = useState(true);
+  useEffect(() => {
+    let interval;
+    if (running) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 1000);
+      }, 1000);
+    } else if (!running) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [running]);
+  return (
+    <div className="stopwatch">
+      <div className="numbers">
+        <span>{("0" + Math.floor((time / (60000 * 60)) % 60)).slice(-2)}:</span>
+        <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
+        <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
+      </div>
+    </div>
+  );
+};
+
+function Rest() {
   const [modalOpen, setModalOpen] = useState(false);
   const showModal = () => {
     setModalOpen(true);
@@ -13,6 +39,7 @@ function Question() {
     <>
       <Container>
         <Box>
+          <Stopwatch />
           <h1>잠깐 자리를 비우시겠어요?</h1>
           <p>
             걱정하지 마세요!
@@ -28,4 +55,4 @@ function Question() {
     </>
   );
 }
-export default Question;
+export default Rest;

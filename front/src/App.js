@@ -4,6 +4,8 @@ import reset from "styled-reset";
 import Helmet from "react-helmet";
 import InterTTF from "./assets/Inter.ttf";
 
+import laptopImg from "./assets/laptopImg.png";
+
 function App() {
   return (
     <div className="App">
@@ -14,7 +16,7 @@ function App() {
           content="노트북을 지키는 노트북 거치대 <K-노양심>입니다!"
         />
 
-        {/* <link rel="icon" href={} />/ */}
+        <link rel="icon" href={laptopImg} />
       </Helmet>
       <Router />
       <GlobalStyle />

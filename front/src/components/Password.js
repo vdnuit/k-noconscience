@@ -46,7 +46,7 @@ function Password({ setModalOpen }) {
         value={text}
         placeholder="비밀번호"
       />
-      <button onclick={closeModal}>입력</button>
+      <button onClick={closeModal}>입력</button>
     </Container>
   );
 }
