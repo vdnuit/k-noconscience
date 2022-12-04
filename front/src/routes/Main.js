@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import laptopImg from "../assets/laptopImg.png";
+
 const Container = styled.div``;
 const Box = styled.div``;
 
