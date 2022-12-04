@@ -24,7 +24,7 @@ const Close = styled.button`
 `;
 const Button = styled.button``;
 
-function Password({ setModalOpen }) {
+function Check({ setModalOpen }) {
   const navigate = useNavigate();
   const [text, setText] = useState();
   const [password, setPassword] = useRecoilState(passwordAtom);
@@ -32,14 +32,19 @@ function Password({ setModalOpen }) {
     setText(e.target.value);
   };
   const closeModal = () => {
-    setPassword(text);
-    console.log(password);
-    navigate(`/rest/*`);
-    setModalOpen(false);
+    if (text == password) {
+      console.log(text);
+      console.log(password);
+
+      navigate(`/`);
+      setModalOpen(false);
+    } else {
+      navigate(`/warning/*`);
+    }
   };
   return (
     <Container>
-      <h1>비밀번호를 설정해주세요</h1>
+      <h1>비밀번호를 입력해주세요</h1>
       <input
         type="text"
         onChange={onChange}
@@ -51,8 +56,8 @@ function Password({ setModalOpen }) {
   );
 }
 
-Password.propTypes = {
+Check.propTypes = {
   setModalOpen: PropTypes.func.isRequired,
 };
 
-export default Password;
+export default Check;
