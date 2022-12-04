@@ -31,6 +31,9 @@ const Stopwatch = () => {
 };
 
 function Rest() {
+  fetch("http://localhost:3001/text")
+    .then((response) => response.json())
+    .then((data) => console.log(data));
   const [modalOpen, setModalOpen] = useState(false);
   const showModal = () => {
     setModalOpen(true);
