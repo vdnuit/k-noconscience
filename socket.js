@@ -1,7 +1,26 @@
 const WebSocket = require("ws");
 
 const { SerialPort } = require("serialport");
-module.exports = (server, num) => {
+
+module.exports = (server) => {
+  var num = 0;
+  const arduinoCOMPort = "COM3";
+  const arduinoSerialPort = new SerialPort({
+    path: arduinoCOMPort,
+    baudRate: 9600,
+    dataBits: 8,
+    stopBits: 1,
+    parity: "none",
+  });
+
+  arduinoSerialPort.on("open", function () {
+    console.log("Serial Port " + arduinoCOMPort + " is opened.");
+    arduinoSerialPort.on("data", function (data) {
+      console.log("Sensor Value : ", data[0]);
+      console.log("missing");
+      num = data[0];
+    });
+  });
   //? express 서버와 웹소켓 서버를 연결 시킨다.
   // 변수이름은 wss(web socket server)
   const wss = new WebSocket.Server({ server });
@@ -29,34 +48,13 @@ module.exports = (server, num) => {
       clearInterval(ws.interval); // 연결 끊기면 setInterval 중지
     });
 
-    // 3초마다 클라이언트로 메시지 전송
     ws.interval = setInterval(() => {
       //! 웹소켓은 비동기이기 때문에 삑 날 수 있어, 웹소켓이 클라이언트랑 연결이 되었는지 검사하는 안전 장치
       if (ws.readyState !== ws.OPEN) {
         return;
       }
-      var arduinoCOMPort = "COM3";
 
-      const arduinoSerialPort = new SerialPort({
-        path: arduinoCOMPort,
-        baudRate: 9600,
-        dataBits: 8,
-        stopBits: 1,
-        parity: "none",
-      });
-
-      arduinoSerialPort.on(
-        "open",
-        function () {
-          console.log("Serial Port " + arduinoCOMPort + " is opened.");
-          arduinoSerialPort.on("data", function (data) {
-            ws.send(data[0]);
-            // console.log("Sensor Value : ", data[0]);
-            // console.log("missing");
-          });
-        },
-        1000
-      );
-    });
+      ws.send(num);
+    }, 1000);
   });
 };
